@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: Arial, Helvetica, sans-serif;
+            height: 100vh;
+            background-color: white;
+        }
+
+        img {
+            height: 32px;
+            width: 32px;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+        }
+
+        .chat-container {
+            width: 350px;
+            height: 500px;
+            background-color: white;
+            box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .chat-header {
+            background-color: blue;
+            border: 10px;
+            border-top-right-radius: 10px;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            height: 50px;
+            gap: 10px;
+            display: flex;
+            font-weight: 400;
+
+        }
+
+        .chat-body {
+            flex: 1;
+            padding: 10px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            overflow-y: auto;
+        }
+
+        .message {
+            padding: 10px;
+            max-width: 75%;
+            border-radius: 10px;
+            line-height: 1.3;
+            display: inline-block;
+        }
+
+        .bot {
+            background: #e0e7ff;
+            align-self: flex-start;
+        }
+
+        .user {
+            background: #d1fae5;
+            align-self: flex-end;
+        }
+
+        .chat-input {
+            display: flex;
+            border-top: 1px solid #ddd;
+        }
+
+        .chat-input input {
+            flex: 1;
+            padding: 12px;
+            border: none;
+            outline: none;
+            font-size: 16px;
+        }
+
+        button {
+            background-color: blue;
+            padding: 12px 15px;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+</style>
+</head>
+<body>
+    <div class="chat-container">
+        <div class="chat-header">
+            <img src="ChatBot-removebg-preview.png" alt="Bot">
+                Simple ChatBot
+        </div>
+
+        <div class="chat-body" id="chatbody"></div>
+
+        <div class="chat-input">
+            <input type="text" id="userInput" placeholder="Type a message...">
+            <button onclick="Sendmessage()">Send</button>
+        </div>
+        </div>
+
+        <script>
+            function botreply(message) {
+                messmage = message.toLowerCase();
+
+                if (message.includes("hello") || message.includes("hi")) {
+                    return "Ghar Jaa kele";
+                }
+
+                if (message.includes("How are you?") ) {
+                    return "Love you...!! ";
+                }
+
+                if (message.includes("who are You??") ) {
+                    return "Your Daddy Babe";
+                }
+
+                if (message.includes("who is tamanna?") ) {
+                    return "Chorr..!!!";
+                }
+                if (message.includes("What she does?") ) {
+                    return "Bakwaass";
+                }if (message.includes("What's her main business?") ) {
+                    return "Local Train Chor from Ambernath..";
+                }
+
+                if (message.includes("what's her age?") ) {
+                    return "Tabassum se dikhne mein Choti hai.....";
+                }
+
+                return "Chat GPT maar lwdee jhatu ganduu bhenchod kelechod kailash kill him fuck you fuck off lundd le lwdu  ...!!"
+            }
+
+            function Sendmessage() {
+                let input = document.getElementById("userInput");
+                let text = input.value.trim();
+                if (text === "") return;
+
+                let chatbody = document.getElementById("chatbody");
+
+                chatbody.innerHTML += `<div class="message user">${text}</div>`;
+
+                let reply = botreply(text);
+
+                setTimeout(() => {
+                    chatbody.innerHTML += `<div class="message bot">${reply}</div>`;
+                    chatbody.scrollTop = chatbody.scrollHeight;
+                }, 400
+            );
+
+            input.value = "";
+            chatbody.scrollTop = chatbody.scrollHeight;
+            }
+
+            document.getElementById("userInput").addEventListener("keydown", function(e) {
+                if (e.key === "Enter") {
+                    Sendmessage();
+                    console.log(e);
+                }
+            }
+        );
+        </script>
+</body>
+</html>
